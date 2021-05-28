@@ -1,6 +1,8 @@
 const products = storageGet("products");
 const all_products = document.getElementById("all_products");
 
+
+
 function drawProducts(){
     let products_html = ``;
 
@@ -9,24 +11,24 @@ function drawProducts(){
         `
         <div class="card" style="width: 18rem;">
             <img 
-                src="https://content2.rozetka.com.ua/goods/images/big/45254637.jpg" 
+                src="${product.photo}" 
                 class="card-img-top" 
                 style="	width: auto;height: 230px;margin: 10px auto 0;">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">${product.name}</h5>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between ">
                     <b>Кількість</b>
-                    <p>10</p>
+                    <p>${product.count}</p>
                 </li>
                 <li class="list-group-item d-flex justify-content-between ">
                     <b>Ціна</b>
-                    <p>1000</p>
+                    <p>${product.price}</p>
                 </li>
             </ul>
             <div class="card-body">
-                <button type="button" class="btn btn-primary btn-sm">В корзинy</button>
+                <button type="button" class="btn btn-primary btn-sm" onclick="addToCart(${index}, this)">В корзинy</button>
             </div>
         </div>
         `
@@ -36,5 +38,18 @@ function drawProducts(){
 }
 
 drawProducts();
+
+function addToCart(index, btn){
+    const product = products[index];
+    btn.innerText = "Додано";
+    btn.classList.remove("btn-primary");
+    btn.classList.add("btn-success");
+    btn.disabled = true;
+
+    const cart = storageGet("cart") || [];
+    cart.push(product);
+    storageSave("cart", cart);
+
+}
 
 console.log(products);

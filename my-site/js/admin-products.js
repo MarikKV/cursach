@@ -40,19 +40,4 @@ function deleteProduct(index){
     drawProducts();
 }
 
-function deleteProduct(index){
-    const products = storageGet("products") || [];
-
-    products[index].name = document.getElementById('name');
-    products[index].name = document.getElementById('name');
-    products[index].name = document.getElementById('name');
-    products[index].name = document.getElementById('name');
-
-    storageSave("products", products);
-
-    drawProducts();
-}
-
-
-
 drawProducts();
